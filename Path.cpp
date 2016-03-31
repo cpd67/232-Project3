@@ -37,8 +37,10 @@ int Path::find(const string& program) const {
 			if(string(folder->d_name) == program) {
 				//Close the directory, free up memory, and return the index
 				closedir(directory);
-				delete folder;
-				folder = NULL;				
+		//		delete folder;
+				folder = NULL;
+				//Add one to the index, since it started at 0 and not 1
+				i = i + 1;				
 				return i;
 			}
 		} 
@@ -46,7 +48,7 @@ int Path::find(const string& program) const {
 	//Program not found!
 	closedir(directory);
 	//Close the directory, and free up memory
-	delete folder;
+//	delete folder;
 	folder = NULL;				
 	return -1;
 }
