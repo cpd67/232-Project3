@@ -16,35 +16,35 @@
 #include <string>
 #include <cstring>
 
+
 using namespace std;
 
 CommandLine::CommandLine(istream& in){
 	argumentC = 0;
 	argumentV = NULL;
+	isAmp=false;
 	string it="this will be the maximum length command";
 	char str[256];
     in.clear();
 	in.getline(str,256);
-
 	//the following loop counts to see how many white space chars are in the input
 	int count=0;
 	for(int i=0;i<256;i++){
 		if(str[i]==' ')
 			count++;
+		if(str[i]=='&')
+			isAmp=true;
 	}
 	count=count-2;
-	if(count == 0) {
+	if(count <= 0) {
 		count =1;
 	}
-	//cout << "the count is " << count<<endl;
-	//strcpy(input,str1);
-	//cout<<input<<endl<<flush;
-
-
+	cout << count<<endl;
 	char * element = new char [it.length()+1];
 	//char * element = (char*) malloc(it.length()+1);
 	char** temp = (char **)calloc(count,sizeof(it));
 	element =strtok (str," ");
+	//getline(in,(string)element,' ');
 	while (element!=NULL){
 		//strcpy(ARGV[0],element);
 		temp[argumentC] = element;
@@ -52,13 +52,13 @@ CommandLine::CommandLine(istream& in){
 		element = strtok (NULL, " ");
 		argumentC++;
 	}
-
 	argumentV = temp;
-//	for(int i = 0;i<3;i++){
-//		//cout << "The " << i << "th element in argv is " << &temp[0] << endl;
-//		cout << argv[i] << endl;
-//		cout << flush;
-//	}
+	cout <<"the temp value of the pointer is"<< temp << endl;
+	for(int i = 0;i<3;i++){
+		//cout << "The " << i << "th element in argv is " << &temp[0] << endl;
+		//cout << argumentV[i] << endl;
+
+	}
 
 }
 
@@ -180,6 +180,16 @@ int CommandLine::getArgCount(){
 
 char* CommandLine::getArgVector(int i){
 return argumentV[i];
+}
+
+bool CommandLine::noAmpersand() const {
+	return !isAmp;
+}
+
+CommandLine::~CommandLine(){
+
+	free(argumentV);
+
 }
 
 
