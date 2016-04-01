@@ -52,8 +52,11 @@ CommandLine::CommandLine(istream& in){
 		element = strtok (NULL, " ");
 		argumentC++;
 	}
+
 	argumentV = temp;
-	cout <<"the temp value of the pointer is"<< temp << endl;
+     cout <<"the temp value of the pointer is"<< temp << endl;
+     cout << "the size if " << argumentC << endl;
+	//cout<<flush;
 	for(int i = 0;i<3;i++){
 		//cout << "The " << i << "th element in argv is " << &temp[0] << endl;
 		//cout << argumentV[i] << endl;
@@ -186,10 +189,11 @@ bool CommandLine::noAmpersand() const {
 	return !isAmp;
 }
 
-CommandLine::~CommandLine(){
+//CommandLine::~CommandLine(){
+//
+//	delete [] argumentV;
+//
+//}
 
-	free(argumentV);
-
-}
 
 
