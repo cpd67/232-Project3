@@ -39,8 +39,6 @@ int Path::find(const string& program) const {
 				closedir(directory);
 		//		delete folder;
 				folder = NULL;
-				//Add one to the index, since it started at 0 and not 1
-				i = i + 1;				
 				return i;
 			}
 		} 

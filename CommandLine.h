@@ -7,7 +7,7 @@
 
 #ifndef COMMANDLINE_H_
 #define COMMANDLINE_H_
-#include<string>
+#include <string>
 
 using namespace std;
 
@@ -16,13 +16,16 @@ public:
 	CommandLine(istream& in);
 	//void parse(const char *array[],int length);
 	void parse(char input[]);
-	char** getArgVector();
-	int getArgCount();
+	char** getArgVector() const;
+	int getArgCount() const ;
 	char* getCommand() const;
-	char* getArgVector(int i);
+	char* getArgVector(int i) const;
+	bool noAmpersand() const;
+	~CommandLine();
 private:
 	char** argumentV;
 	int argumentC;
+	bool isAmp;
 
 };
 

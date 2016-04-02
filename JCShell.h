@@ -8,16 +8,27 @@
 #ifndef JCSHELL_H_
 #define JCSHELL_H_
 
+#include <iostream>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include "JCShell.h"
+#include "CommandLine.h"
+#include "Path.h"
+#include "Prompt.h"
+using namespace std;
+
 class JCShell{
 
-	public:
+public:
 	JCShell();
 	void run();
 
-
-
-	private:
-	char userInput[250];
+private:
+	CommandLine * myLine;
+	Path * myPath;
+	Prompt * myPrompt;
 
 };
 

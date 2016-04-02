@@ -3,8 +3,8 @@
 
 /**
  * To start:
- *  1). Create a JCShell object, which creates three objects: CommandLine, Path, and Prompt.
- *  2). Display the Prompt, and await user input from cin.
+ *  1). Create a JCShell object, which creates two objects: Path, and Prompt.
+ *  2). Display the Prompt, create a CommandLine object, and await user input from cin.
  *  3). When we get user input, we parse it for the command, and then use the Path.find() method to find the directory.
  *  4). If found, we take the number that was returned from the previous step and pass it to the Path.getDirectory() function.
  *      If not, print an error message, but don't exit the command line.
@@ -15,7 +15,7 @@
  */
 int main() {
 	Path p;
-	int test = p.find("ld");
+	int test = p.find("ps");
 	cout << test << endl;
 	Prompt p2;
 	cout << p2.get() << endl;

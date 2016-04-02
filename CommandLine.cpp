@@ -23,7 +23,7 @@ CommandLine::CommandLine(istream& in){
 	argumentC = 0;
 	argumentV = NULL;
 	isAmp=false;
-	string it="this will be the maximum length command";
+	string it="this will be the maximum length command        ";
 	char str[256];
     in.clear();
 	in.getline(str,256);
@@ -35,11 +35,13 @@ CommandLine::CommandLine(istream& in){
 		if(str[i]=='&')
 			isAmp=true;
 	}
+	
 	count=count-2;
 	if(count <= 0) {
 		count =1;
 	}
-	cout << count<<endl;
+//	cout << count<<endl;
+
 	char * element = new char [it.length()+1];
 	//char * element = (char*) malloc(it.length()+1);
 	char** temp = (char **)calloc(count,sizeof(it));
@@ -53,15 +55,18 @@ CommandLine::CommandLine(istream& in){
 		argumentC++;
 	}
 
-	argumentV = temp;
+	 argumentV = temp;
+	 //Free the element holder variable
+	 free(element);
+
      cout <<"the temp value of the pointer is"<< temp << endl;
      cout << "the size if " << argumentC << endl;
 	//cout<<flush;
-	for(int i = 0;i<3;i++){
+//	for(int i = 0;i<3;i++){
 		//cout << "The " << i << "th element in argv is " << &temp[0] << endl;
 		//cout << argumentV[i] << endl;
 
-	}
+//	}
 
 }
 
@@ -173,27 +178,24 @@ void CommandLine::parse(char input[]){
 
 }
 
-
-char** CommandLine::getArgVector(){
+char** CommandLine::getArgVector() const {
 	return argumentV;
 }
-int CommandLine::getArgCount(){
+int CommandLine::getArgCount() const {
 	return argumentC;
 }
 
-char* CommandLine::getArgVector(int i){
-return argumentV[i];
+char* CommandLine::getArgVector(int i) const {
+	return argumentV[i];
 }
 
 bool CommandLine::noAmpersand() const {
 	return !isAmp;
 }
 
-//CommandLine::~CommandLine(){
-//
-//	delete [] argumentV;
-//
-//}
+//Happens when we are double freeing something....
+CommandLine::~CommandLine(){
 
+//	free(argumentV);
 
-
+}
