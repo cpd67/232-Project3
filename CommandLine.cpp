@@ -24,18 +24,26 @@ CommandLine::CommandLine(istream& in){
 	isAmp=false;
    //this is the maximum size of one word that our vector will store
 	string it="this will be the maximum length command        ";
-	char str[256];
-    in.clear();
-    //get the user input
-	in.getline(str,256);	
-	string str1(str);
-	//the following loop counts to see how many white space chars are in the input
-	int count=0;
-	for(int i=0;i<str1.length();i++){
-		if(isspace(str1[i]))
+
+
+
+
+
+   string input;
+   getline(cin,input);
+   char* str;
+   str = const_cast<char*>(input.c_str());
+
+
+
+  int count=0;
+	for(int i=0;i<input.length();i++){
+		if(isspace(input[i])) {
 			count++;
+            //cout <<"loop" <<endl;
+             }
         //if there is an ampersand, then set the correspoinding instance variable to true.
-		if(str1[i]=='&')
+		if(input[i]=='&')
 			isAmp=true;
 	}
 	//if there is one one argument (no white space) then set count to 1
@@ -43,24 +51,37 @@ CommandLine::CommandLine(istream& in){
 	if(count <= 0) {
 		count =1;
 	}
+
+
+
+
+
+  
+    
 	
 	char * element = NULL; 
-	char ** temp = (char **)calloc(count+1,sizeof(char*));	
+	//char ** temp = (char **)calloc(count+1,sizeof(char*));	
+    argumentV = (char **)calloc(count+1,sizeof(char*));
    //strtok is a c tokenizer that breaks apart the user input separated by a white space.
    //the idea for this while loop came from http://www.cplusplus.com/reference/cstring/strtok/
 	element = strtok (str," ");
+    int c = 0;
 	while (element!=NULL){
-		element[sizeof(char*)] = '\0';
+       // cout << "the " << c++ << " element is " << element<< endl;
+		//element[sizeof(char*)] = '\0';
 		//strcpy(ARGV[0],element);
-		temp[argumentC] = element;
+		argumentV[argumentC] = element;
 		//printf ("%s\n",element);
 		element = strtok (NULL, " ");
 		argumentC++;
 	}
-	 argumentV = temp;
-	 argumentV[argumentC] = (char*)NULL; 
+   //I added the following line of code
+   argumentC=count;
+	 //argumentV = temp;
+	argumentV[argumentC] = (char*)NULL;
    	//Free the element holder variable
 	 free(element);
+ 
 //     cout <<"the temp value of the pointer is"<< temp << endl;
  //    cout << "the size if " << argumentC << endl;
 }
@@ -109,3 +130,4 @@ CommandLine::~CommandLine(){
 //	free(argumentV);
 
 }
+
