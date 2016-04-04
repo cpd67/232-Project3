@@ -68,7 +68,7 @@ CommandLine::CommandLine(istream& in){
     int c = 0;
 	while (element!=NULL){
        // cout << "the " << c++ << " element is " << element<< endl;
-		element[sizeof(char*)] = '\0';
+		//element[sizeof(char*)] = '\0';
 		//strcpy(ARGV[0],element);
 		argumentV[argumentC] = element;
 		//printf ("%s\n",element);
