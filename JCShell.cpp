@@ -64,7 +64,7 @@ void JCShell::run(){
 							//string fullPath = directory + "/" + (string)command;
 							directory = directory + "/" + command;						
 							cout << directory << endl;		
-							execve(directory.c_str(), args, NULL);  //Only problem is this now!
+							execve(directory.c_str(), c.getArgVector(), NULL);  //Only problem is this now!
 							_exit(EXIT_SUCCESS);
 						} else {
 							int status;

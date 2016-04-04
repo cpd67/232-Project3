@@ -45,8 +45,8 @@ CommandLine::CommandLine(istream& in){
 	 argumentV[argumentC] = (char*)NULL; 
    	//Free the element holder variable
 	 free(element);
-     cout <<"the temp value of the pointer is"<< temp << endl;
-     cout << "the size if " << argumentC << endl;
+//     cout <<"the temp value of the pointer is"<< temp << endl;
+ //    cout << "the size if " << argumentC << endl;
 }
 
 char* CommandLine::getCommand() const {
