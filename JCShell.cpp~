@@ -7,7 +7,7 @@
  */
 
 /*JCShell is the shell class that runs our shell
- * uses Path,Prompt,CommandLine classes
+ * 
  */
 #include "JCShell.h"
 

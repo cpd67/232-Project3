@@ -2,8 +2,7 @@
  * driver.cpp
  *
  *  Created on: Mar 26, 2016
- *      Author: jjh35 Jesse Hulse
- *  this code was provided for the project
+ *      Author: jjh35
  */
 
  #include "JCShell.h"
