@@ -6,7 +6,7 @@
  *  this code was provided for the project
  */
 
- #include "JCShell.h"
+#include "JCShell.h"
 
 /**
  * To start:
@@ -21,8 +21,8 @@
  *
  */
 
-   int main()
-   {
-      JCShell myShell;
-      myShell.run();
-   }
+int main()
+{
+	JCShell myShell;
+	myShell.run();
+}

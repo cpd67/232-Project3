@@ -22,27 +22,27 @@ CommandLine::CommandLine(istream& in){
 	argumentC = 0;
 	argumentV = NULL;
 	isAmp=false;
-   //this is the maximum size of one word that our vector will store
+	//this is the maximum size of one word that our vector will store
 	string it="this will be the maximum length command        ";
 
 
 
 
 
-   string input;
-   getline(cin,input);
-   char* str;
-   str = const_cast<char*>(input.c_str());
+	string input;
+	getline(cin,input);
+	char* str;
+	str = const_cast<char*>(input.c_str());
 
 
 
-  int count=0;
+	int count=0;
 	for(int i=0;i<input.length();i++){
 		if(isspace(input[i])) {
 			count++;
-            //cout <<"loop" <<endl;
-             }
-        //if there is an ampersand, then set the correspoinding instance variable to true.
+			//cout <<"loop" <<endl;
+		}
+		//if there is an ampersand, then set the correspoinding instance variable to true.
 		if(input[i]=='&')
 			isAmp=true;
 	}
@@ -56,18 +56,18 @@ CommandLine::CommandLine(istream& in){
 
 
 
-  
-    
-	
+
+
+
 	char * element = NULL; 
 	//char ** temp = (char **)calloc(count+1,sizeof(char*));	
-    argumentV = (char **)calloc(count+1,sizeof(char*));
-   //strtok is a c tokenizer that breaks apart the user input separated by a white space.
-   //the idea for this while loop came from http://www.cplusplus.com/reference/cstring/strtok/
+	argumentV = (char **)calloc(count+1,sizeof(char*));
+	//strtok is a c tokenizer that breaks apart the user input separated by a white space.
+	//the idea for this while loop came from http://www.cplusplus.com/reference/cstring/strtok/
 	element = strtok (str," ");
-    int c = 0;
+	int c = 0;
 	while (element!=NULL){
-       // cout << "the " << c++ << " element is " << element<< endl;
+		// cout << "the " << c++ << " element is " << element<< endl;
 		//element[sizeof(char*)] = '\0';
 		//strcpy(ARGV[0],element);
 		argumentV[argumentC] = element;
@@ -75,15 +75,15 @@ CommandLine::CommandLine(istream& in){
 		element = strtok (NULL, " ");
 		argumentC++;
 	}
-   //I added the following line of code
-   argumentC=count;
-	 //argumentV = temp;
+	//I added the following line of code
+	argumentC=count;
+	//argumentV = temp;
 	argumentV[argumentC] = (char*)NULL;
-   	//Free the element holder variable
-	 free(element);
- 
-//     cout <<"the temp value of the pointer is"<< temp << endl;
- //    cout << "the size if " << argumentC << endl;
+	//Free the element holder variable
+	free(element);
+
+	//     cout <<"the temp value of the pointer is"<< temp << endl;
+	//    cout << "the size if " << argumentC << endl;
 }
 
 
@@ -127,7 +127,7 @@ bool CommandLine::noAmpersand() const {
 //the deconstructor
 CommandLine::~CommandLine(){
 
-//	free(argumentV);
+	//	free(argumentV);
 
 }
 
