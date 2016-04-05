@@ -12,78 +12,66 @@
 #include "CommandLine.h"
 
 
-/*Commandline uses parses the input and constructos a char ** vector that has pointers to the different words that the
+/*Commandline uses parses the input and constructos a char ** vector that has 
+ *pointers to the different words that the
  *user inputs. It allows stores the number of arguments in the vector (argumentC)
  *@istream& in is the in stream used to get the input from the user (it is STDIN)
  * returns nothing, gives values to argumentV, argumentC, and isAmp
  */
-
 CommandLine::CommandLine(istream& in){
 	argumentC = 0;
 	argumentV = NULL;
 	isAmp=false;
-	//this is the maximum size of one word that our vector will store
-	string it="this will be the maximum length command        ";
-
-
-
-
-
+	//Input from the user
 	string input;
+	//Get it from cin
 	getline(cin,input);
 	char* str;
+	//Cast the input to a const char *
 	str = const_cast<char*>(input.c_str());
 
-
-
 	int count=0;
+	//Loop through the input and count the number of white space characters
 	for(int i=0;i<input.length();i++){
 		if(isspace(input[i])) {
 			count++;
-			//cout <<"loop" <<endl;
 		}
 		//if there is an ampersand, then set the correspoinding instance variable to true.
-		if(input[i]=='&')
+		if(input[i]=='&') {
 			isAmp=true;
+			//http://stackoverflow.com/questions/5891610/how-to-remove-characters-from-a-string
+			//Take out the ampersand from the command
+			//Nate B. showed me how to do this as well
+			input.erase (std::remove(input.begin(), input.end(), '&'), input.end());
+		}
 	}
+
 	//if there is one one argument (no white space) then set count to 1
 	count=count+1;
 	if(count <= 0) {
 		count =1;
 	}
 
-
-
-
-
-
-
-
 	char * element = NULL; 
-	//char ** temp = (char **)calloc(count+1,sizeof(char*));	
 	argumentV = (char **)calloc(count+1,sizeof(char*));
 	//strtok is a c tokenizer that breaks apart the user input separated by a white space.
 	//the idea for this while loop came from http://www.cplusplus.com/reference/cstring/strtok/
 	element = strtok (str," ");
 	int c = 0;
 	while (element!=NULL){
-		// cout << "the " << c++ << " element is " << element<< endl;
-		//element[sizeof(char*)] = '\0';
-		//strcpy(ARGV[0],element);
 		argumentV[argumentC] = element;
-		//printf ("%s\n",element);
 		element = strtok (NULL, " ");
 		argumentC++;
 	}
 	//I added the following line of code
+	//Initialize argumentC to count
 	argumentC=count;
-	//argumentV = temp;
+	//You need a NULL at the end of the char ** vector
+	//When passing it into execve().
+	//http://linux.die.net/man/3/execv
 	argumentV[argumentC] = (char*)NULL;
 	//Free the element holder variable
 	free(element);
-
-	//     cout <<"the temp value of the pointer is"<< temp << endl;
-	//    cout << "the size if " << argumentC << endl;
 }
 
 
@@ -94,6 +82,7 @@ CommandLine::CommandLine(istream& in){
 char* CommandLine::getCommand() const {
 	return argumentV[0];
 }
+
 /* getArgVector returns the argumentV
  * returns a char** that points to the first argument in the vector
  */
@@ -123,11 +112,10 @@ bool CommandLine::noAmpersand() const {
 	return !isAmp;
 }
 
-//Happens when we are double freeing something....
-//the deconstructor
+/**
+ * The deconstructor for the CommandLine class.
+ */
 CommandLine::~CommandLine(){
-
-	//	free(argumentV);
-
+	free(argumentV);
+	argumentV = NULL;
 }
-
